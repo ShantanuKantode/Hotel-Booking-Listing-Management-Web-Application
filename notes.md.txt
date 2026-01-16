@@ -1,0 +1,45 @@
+📌 Listing Schema:
+1. This schema defines an Airbnb-style listing using Mongoose.
+I used nested image objects to support scalable image handling, 
+added validation for required fields, and implemented default values
+and setters to maintain data integrity.
+
+2.Image ko maine ek object ke form me store kiya hai, taaki future me Cloudinary integration easy ho
+  I used a setter to prevent empty image URLs and ensure a fallback image.
+
+📌 Index Route:
+  here  we used GET /listing --> all Listing at single route with ejs
+
+📌 Read: show route:
+     GET listing/:id  => all data to be shown
+     here 1st we bring id , with listing.findById()
+     then , render show.
+     to make prices in Indian style -> uses this function "toLocaleString("en-IN")"
+     <li>&#8377; <%= listing.price.toLocaleString("en-IN") %></li>
+
+📌 Create : New & Create route
+   GET /Listing/new  --> Form  --> Submit 
+             -->
+   POST /listing
+
+  here we design page for new Listing , which is created with method "GET" to create new listing and "POST" to show 
+  "const newListing = new Listing(req.body.listing); 
+   console.log(newListing.save());
+   res.redirect("/listings");"
+   above was used in app.post to take value and display at main page 
+
+📌 Update Route:
+  🎯Edit route ->   GET /listings/:id/edit
+      In ejs => method="POST" and 'insert value for each input to edit
+               value="<%= listing.title %>" ',
+                access id 
+     ⭐When the POST request is converted into PUT is done with the help of 
+     pakage "method-override"
+
+
+  🎯Update :=>  PUT /listings/:id
+    app.js > app.put()  >
+         Listing.findByIdAndUpdate(id,  {...req.body.listing});
+      here first find through ID and update it value with ^
+
+      to redirect at orignal postion --> res.redirect("/listings/${id}");
