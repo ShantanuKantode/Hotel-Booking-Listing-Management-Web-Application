@@ -101,5 +101,5 @@ In app.js >>
 In error.ejs >>
 
 📌Schema Validation 
- 
+ Perform Schema Validation
 
