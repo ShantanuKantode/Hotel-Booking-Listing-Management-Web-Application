@@ -1,0 +1,190 @@
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+} 
+
+body {
+  /* background-color: rgb(240, 239, 237); */
+   font-family: "Plus Jakarta Sans", sans-serif !important;
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+   /* background-color: #f5f6f7; */
+}
+
+.container{
+   flex: 1;
+}
+
+
+/* Navbar */
+.navbar{
+   height: 5rem;
+
+}
+
+.fa-archway{
+   color:rgb(35, 146, 244);
+   font-size: 2.3rem;
+}
+
+/* Footer */
+.f-info-links a{
+   text-decoration: none;
+   color: black;
+   width: 100%;
+}
+
+.f-info-links  a:hover{
+   text-decoration: underline;
+}
+
+.f-info-socials  {
+   width: 100%;
+    margin: 0 8px;
+   cursor: pointer;
+     transition: color 0.3s ease;
+   color: #21212156;
+  
+   
+}
+
+.f-info-social i:hover {
+    color: #000000;   /* LinkedIn blue style */
+}
+
+.f-info-socials i{
+   font-size: 22px;
+    margin-right: 1rem;
+}
+
+.f-info-comp{
+   color: rgb(0, 0, 0);
+   font-weight: 500;
+   
+}
+
+.f-info{
+   display: flex;
+    flex-direction: column;   /* one div after another */
+    align-items: center;      /* center horizontally */
+    justify-content: center;
+    gap: 12px;                /* space between divs */
+    font-size: 14px;
+    color: #333;
+    background-color: rgb(237, 241, 241);
+
+}
+
+/* index.ejs > card */
+/* Carousel wrappe  */
+.carousel {
+  max-width: 100%;
+  margin: 20px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+ 
+/* Image in Carousel */
+.carousel-inner img {
+  width: 100%;
+  height: 450px;        /* desktop height */
+  object-fit: cover;   /* prevents image distortion */
+  border-radius: 12px;
+  
+}
+
+/* Controls visibility */
+.carousel-control-prev,
+.carousel-control-next {
+  filter: brightness(0.9);
+}
+
+/* card */
+.card{
+   border: none !important;
+   margin-bottom:  2rem;
+
+}
+
+.card-img-top{
+   border-radius: 1rem !important ;
+   width: 100% !important;
+   object-fit: cover !important ;
+}
+
+.card-body{
+   padding: 0;
+
+}
+
+.card-text p{
+   font-weight: 400 !important;
+}
+
+.listing-link{
+   text-decoration: none;
+}
+/* Card effect Overlays */
+.card-img-overlay{
+   opacity: 0;
+}
+
+.card-img-overlay:hover{
+   opacity: 0.2;
+   background-color: rgba(255, 255, 255, 0.664) ;
+}
+
+/* New Page */
+.add-btn{
+   background-color: rgba(35, 146, 244, 0.718) !important;
+   border: none !important;
+}
+/* Edit Page */
+.edit-btn{
+   background-color: rgb(60, 169, 233);
+}
+
+.delete-btn{
+   background-color: rgba(244, 35, 35, 0.815) !important;
+   border: none;
+}
+
+/* Show Page */
+.show-image{
+   height: 30vh;
+   object-fit: cover;
+   padding: 5px 1px;
+   
+   
+}
+
+.btns{
+   display: flex;
+}
+
+.listing-card {
+  border-radius: 12px;
+  overflow: hidden;
+
+}
+
+
+
+
+/* Listing image */
+.listing-img {
+  height: 420px;
+  object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  
+}
+
+/* Card hover effect (optional) */
+.card:hover {
+  transform: scale(1.01);
+  transition: 0.3s ease-in-out;
+}

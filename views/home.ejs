@@ -1,0 +1,136 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .hero {
+    height: 80vh;
+    background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+
+  .search-box {
+    background: white;
+    padding: 10px;
+    border-radius: 50px;
+    display: flex;
+    max-width: 500px;
+    margin: auto;
+  }
+
+  .search-box input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 10px;
+  }
+
+  .search-btn {
+    background: #ff385c;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    padding: 10px 15px;
+  }
+
+  .card img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    transform: scale(1.03);
+  }
+
+  .section-title {
+    text-align: center;
+    margin: 40px 0 20px;
+  }
+
+  .features {
+    padding: 50px 0;
+    text-align: center;
+  }
+
+  .feature-box {
+    padding: 20px;
+  }
+
+  .feature-icon {
+    font-size: 40px;
+    color: #ff385c;
+  }
+  
+</style>
+
+<!-- HERO SECTION -->
+<div class="hero">
+  <div>
+    <h1>Find Your Next Stay</h1>
+    <p>Search low prices on hotels, homes and more...</p>
+
+    <!-- SEARCH BAR -->
+    <form action="/listings" method="GET" class="search-box">
+      <input type="text" name="location" placeholder="Search by location..." />
+      <button class="search-btn">🔍</button>
+    </form>
+  </div>
+</div>
+
+<!-- FEATURES SECTION -->
+<div class="container features">
+  <div class="row">
+    
+    <div class="col-md-4 feature-box">
+      <div class="feature-icon">🏨</div>
+      <h4>Best Hotels</h4>
+      <p>Handpicked hotels with top ratings</p>
+    </div>
+
+    <div class="col-md-4 feature-box">
+      <div class="feature-icon">💰</div>
+      <h4>Affordable Prices</h4>
+      <p>Budget-friendly stays for everyone</p>
+    </div>
+
+    <div class="col-md-4 feature-box">
+      <div class="feature-icon">🌍</div>
+      <h4>Worldwide</h4>
+      <p>Explore stays across the globe</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FEATURED LISTINGS -->
+<div class="container">
+  <h2 class="section-title">Featured Listings</h2>
+
+  <div class="row">
+    <% for(let listing of listings){ %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="<%= listing.image.url %>" class="card-img-top" alt="">
+
+          <div class="card-body">
+            <h5 class="card-title"><%= listing.title %></h5>
+            <p class="card-text">₹ <%= listing.price %> / night</p>
+
+            <a href="/listings/<%= listing._id %>" class="btn btn-dark">
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>

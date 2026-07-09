@@ -43,3 +43,63 @@ and setters to maintain data integrity.
       here first find through ID and update it value with ^
 
       to redirect at orignal postion --> res.redirect("/listings/${id}");
+
+📌 EJS mate => 
+install - npm install ejsMate
+
+In Express:=> 
+    const ejsMate = require("ejs-Mate)
+    app.engine("ejs" , ejs-Mate)
+
+  views > layouts > boilerplate.ejs =>
+  In boilerplate.ejs :
+    create your own templete which is going to used into multiple page
+    <html - boilerplate> -------
+     <body> 
+        <div> <%- body -%>  </div>
+     <body>
+    </html>
+
+In index.ejs :
+  <% layouts('boilerplate') -%>
+
+In style.css : provide syle property into it 
+to connect it into boilerplate insert it after the bootstarp style 
+
+📌 Index.ejs >
+1. inset card from bootstarp
+2. add image from database > <% listing.image.url %>
+3. design card in style
+
+
+ 📌Style.css 
+ Card iamge overlay from bootstrap is done with its own class in index.ejs after image
+ and apply css style of opacity and background-color
+
+📌Client-side validation
+  ⭐Form validation: When we enter data in the form , the browser and/or the web
+      server will check to see that the data is the correct format and within the constraints set by the application.
+
+In new.ejs >>
+  required keyword is used into ejs for there should be values (no-empty)
+  i. <input required>....</input>
+
+⭐With the bootstarp class of "needs-validation" and "novalidate" keyword it give better Ui expernce to client
+  i.e. <form class="row g-3 needs-validation" novalidate>
+  and have to insert script.js from bootstarp which is at public.
+
+
+📌Success and Failure Text
+ If we missed any value so, it will show text which will indicate.
+ * Inside the form used div which show validation through class="valid-feedback" for Success text(complete) 
+   and class="invalid-feedback" for failure text(incomplete)
+
+📌Custom Error Handler
+In app.js >>
+  We use Custom wrapAsync function at folder utils and export it to app.js
+
+In error.ejs >>
+
+📌Schema Validation 
+ 
+

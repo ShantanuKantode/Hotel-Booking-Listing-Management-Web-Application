@@ -1,0 +1,72 @@
+
+
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .error-container {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .error-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .error-icon {
+    font-size: 60px;
+    color: #ff385c; /* Airbnb color */
+  }
+
+  .error-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .error-msg {
+    color: #6c757d;
+    margin: 10px 0 20px;
+  }
+
+  .btn-home {
+    background-color: #ff385c;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 20px;
+    border: none;
+  }
+
+  .btn-home:hover {
+    background-color: #e03150;
+  }
+</style>
+
+<div class="error-container">
+  <div class="error-card">
+    
+    <div class="error-icon">
+      ⚠️
+    </div>
+
+    <div class="error-title">
+      Oops! Something went wrong
+    </div>
+
+    <p class="error-msg">
+      <%= message %>
+    </p>
+
+    <a href="/listings" class="btn btn-home">
+      Go Back to Listings
+    </a>
+
+  </div>
+</div>
