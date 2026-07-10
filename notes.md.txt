@@ -103,3 +103,7 @@ In error.ejs >>
 📌Schema Validation 
  Perform Schema Validation
 
+
+ 📌 Make Changes in Navbar 
+ 
+
