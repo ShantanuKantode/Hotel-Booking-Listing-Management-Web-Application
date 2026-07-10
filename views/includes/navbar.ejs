@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom">
+<!-- <nav class="navbar navbar-expand-md bg-body-light border-bottom">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><i class="fa-solid fa-archway"></i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,5 +12,148 @@
         
    </div>
     </div>
+  </div>
+</nav> -->
+
+
+
+<!-- ////////////////////////////////////////////////// -->
+ <nav class="navbar navbar-expand-lg yatra-navbar sticky-top">
+  <div class="container-fluid navbar-container">
+
+    <!-- Brand Logo -->
+    <a class="navbar-brand" href="/">
+      <div class="brand-icon">
+        <i class="fa-solid fa-house"></i>
+      </div>
+
+      <span>
+        Yatra<span class="brand-highlight">BnB</span>
+      </span>
+    </a>
+
+    <!-- Mobile Toggle Button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div
+      class="collapse navbar-collapse"
+      id="navbarContent"
+    >
+
+      <!-- Center Navigation Links -->
+      <ul class="navbar-nav navbar-links mx-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            Home
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/listings">
+            Explore
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            Popular Stays
+          </a>
+        </li>
+
+      </ul>
+
+      <!-- Right Side -->
+      <div class="navbar-actions">
+
+        <!-- Search Button -->
+        <a
+          href="/listings"
+          class="nav-search"
+          aria-label="Search properties"
+        >
+          <span>Search stays</span>
+
+          <div class="search-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </a>
+
+        <!-- Add Property -->
+        <a
+          href="/listings/new"
+          class="add-property-btn"
+        >
+          <i class="fa-solid fa-plus"></i>
+          <span>Add Property</span>
+        </a>
+
+        <!-- User Menu -->
+        <div class="dropdown">
+
+          <button
+            class="profile-menu"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-bars menu-icon"></i>
+
+            <div class="profile-icon">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          </button>
+
+          <ul
+            class="dropdown-menu dropdown-menu-end profile-dropdown"
+          >
+
+            <li>
+              <a class="dropdown-item" href="#">
+                <i class="fa-solid fa-user-plus"></i>
+                Sign Up
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="#">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Login
+              </a>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a
+                class="dropdown-item"
+                href="/listings/new"
+              >
+                <i class="fa-solid fa-house-circle-check"></i>
+                List your property
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 </nav>

@@ -12,4 +12,4 @@ const listingSchema = Joi.object({
    }).required()
 });
 
-module.export = listingSchema;
+module.exports = listingSchema;
