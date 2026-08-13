@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
 const mongoose = require("mongoose");
-const Listing = require("./models/listing");
+const Listing = require("./models/listing.js");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js")
 const listingSchema = require("./schema.js");
+const Review = require("./models/review.js");
 //step-3 - mongodb connection
 async function main(){
    await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
@@ -106,6 +107,46 @@ app.delete("/listings/:id",wrapAsync(async(req,res)=>{
    console.log(deleteListing);
    res.redirect("/listings");
 }))
+
+
+//Review Route -(POST)
+// app.post("/listings/:id/reviews",async(req,res)=>{
+//   console.log("Review route called!");
+//   console.log(req.body);
+ 
+//    let listing = await Listing.findById(req.params.id);
+//    let newReview = new Review(req.body.review);
+
+//   listing.reviews.push(newReview);
+
+//   await newReview.save();
+//   await listing.save();
+ 
+//   console.log("New Review Saved");
+//   res.redirect(`/listings/${listing._id}`);
+
+
+// })
+
+app.post("/listings/:id/reviews", async (req, res) => {
+
+    console.log("Review route called!");
+    console.log(req.body);
+
+    let listing = await Listing.findById(req.params.id);
+
+    let newReview = new Review(req.body.review);
+
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+
+    console.log("New Review Saved");
+
+    res.redirect(`/listings/${listing._id}`);
+});
+
 
 // app.get("/testListing" ,async(req,res)=>{
 //     let sampleListing = new Listing({
