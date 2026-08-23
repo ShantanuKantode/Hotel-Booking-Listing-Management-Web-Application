@@ -9,6 +9,26 @@ const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js")
 const {listingSchema,reviewSchema} = require("./schema.js");
 const Review = require("./models/review.js");
+const session = require("express-session");
+
+//Express-Session
+const sessionOption = {
+   secret:"mysecret",
+   resave:false,
+   saveUninitialized: true,
+   //cookie-option
+   cookie:{
+      expires:Date.now() + 7 * 24 * 60 * 60 * 1000,
+      maxAge : 7 * 24 * 60 * 60 * 1000,
+      httpOnly :true,
+   }
+};
+
+app.use(session(sessionOption));
+
+const listings = require("./Routes/listing.js");
+const reviews = require("./Routes/review.js");
+
 //step-3 - mongodb connection
 async function main(){
    await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
@@ -43,108 +63,12 @@ app.get("/", async (req, res) => {
 
 
 
-const validateReview = (req, res, next) => {
-   let {error} = reviewSchema.validate(req.body);
-
-   if(error){
-      let errMsg = error.details.map((el)=>el.message).join(",");
-      throw new ExpressError(400, errMsg);
-   }
-   else{
-      next();
-   }
-};
 
 
 
+app.use("/listings",listings);
+app.use("/listings/:id/reviews", reviews);
 
-//Index Route
-app.get("/listings",wrapAsync(async(req,res)=>{
-  
-   const allListing = await Listing.find({});
-  res.render("listings/index.ejs",{allListing});
-
-  
-}));
-
-//New Route (new route is always at upper of Show route)
-app.get("/listings/new",(req,res,next)=>{
-   
-   res.render("listings/new.ejs");
-   
-   
-});
-
-//Show Route
-app.get("/listings/:id",wrapAsync(async(req,res,next)=>{
-   let {id} = req.params;
-  const listing = await Listing.findById(id).populate("reviews");
-  res.render("listings/show.ejs",{listing});
-}));
-
-//Create Route
-app.post("/listings",wrapAsync(async(req,res,next)=>{
-   //method_1 to take input -> create object and insert key
-   // let{title,description,image,price,location,country} = req.body;
-   
-   //check  a Validation
-   let result = listingSchema.validate(req.body);
-   console.log(result);
-   if(result.error){
-      throw new ExpressError(400, result.error);
-   }
-   const newListing = new Listing(req.body.listing);
-   await newListing.save();
-   res.redirect("/listings");
-
-}));
-
-//Edit Route
-app.get("/listings/:id/edit",wrapAsync(async(req,res) => {
-   let {id} = req.params;
-   const listing = await Listing.findById(id);
-   res.render("listings/edit.ejs" ,{listing});
-}));
-
-//Update route
-app.put("/listings/:id" ,wrapAsync(async(req,res)=>{
-   if(!req.body.listing){
-      throw new ExpressError(404,"Send valid data for listings" );
-   }
-
-   let {id} = req.params;
-   await Listing.findByIdAndUpdate(id, {...req.body.listing});
-   res.redirect(`/listings/${id}`);
-}));
-
-//Delete Route
-app.delete("/listings/:id",wrapAsync(async(req,res)=>{
-   let {id} = req.params;
-   let deleteListing = await Listing.findByIdAndDelete(id);
-   console.log(deleteListing);
-   res.redirect("/listings");
-}))
-
-
-//Review Route -(POST)
-app.post("/listings/:id/reviews", validateReview , wrapAsync(async (req, res) => {
-
-    console.log("Review route called!");
-    console.log(req.body);
-
-    let listing = await Listing.findById(req.params.id);
-
-    let newReview = new Review(req.body.review);
-
-    listing.reviews.push(newReview);
-
-    await newReview.save();
-    await listing.save();
-
-    console.log("New Review Saved");
-
-    res.redirect(`/listings/${listing._id}`);
-}));
 
 
 // app.get("/testListing" ,async(req,res)=>{
