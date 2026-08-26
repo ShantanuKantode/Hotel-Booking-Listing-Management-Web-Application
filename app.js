@@ -10,6 +10,7 @@ const ExpressError = require("./utils/ExpressError.js")
 const {listingSchema,reviewSchema} = require("./schema.js");
 const Review = require("./models/review.js");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 //Express-Session
 const sessionOption = {
@@ -24,7 +25,16 @@ const sessionOption = {
    }
 };
 
+
+
 app.use(session(sessionOption));
+app.use(flash());
+
+app.use((req,res,next) => {
+  res.locals.success =  req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+})
 
 const listings = require("./Routes/listing.js");
 const reviews = require("./Routes/review.js");
