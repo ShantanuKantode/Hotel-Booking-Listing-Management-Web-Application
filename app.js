@@ -46,8 +46,21 @@ app.use((req,res,next) => {
   next();
 })
 
-const listings = require("./Routes/listing.js");
-const reviews = require("./Routes/review.js");
+// app.get("/demouser",async(req,res)=>{
+//    let fakeUser = new User({
+//       email:"student@123.com",
+//       username:"student123",
+//    });
+   
+//    const user = await User.register(fakeUser,"pass@123");
+//    res.send(user);
+//    console.log(user);
+// });
+
+//Router
+const listingRouter= require("./Routes/listing.js");
+const reviewRouter = require("./Routes/review.js");
+const userRouter = require("./Routes/user.js");
 
 //step-3 - mongodb connection
 async function main(){
@@ -86,8 +99,9 @@ app.get("/", async (req, res) => {
 
 
 
-app.use("/listings",listings);
-app.use("/listings/:id/reviews", reviews);
+app.use("/listings",listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/",userRouter);
 
 
 
