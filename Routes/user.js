@@ -9,12 +9,18 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/signup" , wrapAsync(async(req,res)=>{
-    try{
+  try{
    const{username,email,password} = req.body;
    const newUser = User({username,email});
    const newRegister = await User.register(newUser,password);
-   req.flash("success","Welcome");
-   res.redirect("/listings");
+
+   req.login(newRegister , (err)=>{
+     if(err){
+      return next(err);
+    }
+    req.flash("success","User get log In!");
+    res.redirect("/listings");
+   })
    }
     catch(e){
         req.flash("error",e.message);
@@ -24,6 +30,7 @@ router.post("/signup" , wrapAsync(async(req,res)=>{
 }));
 
 router.get('/login' , (req,res)=>{
+  
     res.render("users/login.ejs");
 });
 
@@ -38,6 +45,17 @@ router.post("/login" ,
     }
 );
 
+
+router.get("/logout",(req,res,next)=>{
+   req.logout((err)=>{
+    if(err){
+        next(err);
+    }
+    req.flash("success","User get log out!");
+    res.redirect("/listings");
+   })
+
+});
 
 
 

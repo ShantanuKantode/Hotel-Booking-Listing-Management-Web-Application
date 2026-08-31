@@ -15,6 +15,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+
 //Express-Session
 const sessionOption = {
    secret:"mysecret",
@@ -43,6 +44,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next) => {
   res.locals.success =  req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
   next();
 })
 
@@ -89,7 +91,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //    res.render("home.ejs");
 // });
 
-app.get("/", async (req, res) => {
+ app.get("/",async (req, res) => {
+   
    const listings = await Listing.find({}).limit(6); // only 6 for homepage
    res.render("home.ejs", { listings });
 });
