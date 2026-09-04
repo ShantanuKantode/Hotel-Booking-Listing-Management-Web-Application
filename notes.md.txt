@@ -107,3 +107,8 @@ In error.ejs >>
  📌 Make Changes in Navbar 
  In this navabar ui has been Changes
 
+
+ <% if(currUser && listing.owner && currUser._id.equals(listing.owner._id)) { %>
+
+ <% } %>
+
