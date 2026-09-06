@@ -1,4 +1,5 @@
 const Listing = require("../models/listing.js");
+const { listingSchema } = require("../schema");
 
 module.exports.index=async(req,res)=>{
   const allListing = await Listing.find({});
@@ -53,6 +54,7 @@ module.exports.editListing = async(req,res) => {
 }
 
 module.exports.updateListing = async(req,res)=>{
+   let { id } = req.params;
    await Listing.findByIdAndUpdate(id, {...req.body.listing});
    req.flash("success","Listing Updated !");
    res.redirect(`/listings/${id}`);
