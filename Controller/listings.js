@@ -27,17 +27,13 @@ module.exports.showListing = async(req,res,next)=>{
 };
 
 module.exports.createListing = async(req,res,next)=>{
-   //method_1 to take input -> create object and insert key
-   // let{title,description,image,price,location,country} = req.body;
    
-   //check  a Validation
-   let result = listingSchema.validate(req.body);
-   console.log(result);
-   if(result.error){
-      throw new ExpressError(400, result.error);
-   }
+   const url = req.file.path;
+   const filename = req.file.filename;
+   
    const newListing = new Listing(req.body.listing);
    newListing.owner = req.user._id;  //owner with listing
+   newListing.image = {url , filename};
    await newListing.save();
    req.flash("success" , "New Listing Created !");
    res.redirect("/listings");
