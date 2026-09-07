@@ -5,7 +5,9 @@ const Review = require("./models/review.js");
 
 module.exports.isLoggedIn=(req,res,next)=>{
    if(!req.isAuthenticated()){
-      req.session.redirectUrl = req.originalUrl;
+      req.session.redirectUrl = req.method === "GET"
+         ? req.originalUrl
+         : req.get("referer") || "/listings";
       req.flash("error","User is not loggedIn !");
       return res.redirect("/login");
    }
@@ -57,6 +59,10 @@ module.exports.validateReview = (req, res, next) => {
 module.exports.isAuthor = async(req,res,next)=>{
    let {id , reviewId} = req.params;
    let review = await Review.findById(reviewId);
+   if (!review) {
+      req.flash("error", "Review not found.");
+      return res.redirect(`/listings/${id}`);
+   }
    if(!review.author.equals(res.locals.currUser._id)){
       req.flash("error","You are not author of review !");
       return res.redirect(`/listings/${id}`);

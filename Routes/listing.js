@@ -41,7 +41,6 @@ router.route("/:id")
 //Edit Route
 router.get("/:id/edit",
    isLoggedIn,
-   validateListing,
    wrapAsync(listingController.editListing));
 
 

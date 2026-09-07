@@ -1,0 +1,26 @@
+<% layout("/layouts/boilerplate") %>
+
+<section class="favorites-page" data-favorites-page>
+  <div class="listing-header">
+    <div>
+      <h2>Your Favorites</h2>
+      <p>Places you've saved for your next trip.</p>
+    </div>
+    <div class="listing-count"><%= listings.length %> saved</div>
+  </div>
+
+  <% if (listings.length) { %>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+      <% for (const listing of listings) { %>
+        <%- include("../includes/listing-card.ejs", { listing, favoriteIds }) %>
+      <% } %>
+    </div>
+  <% } else { %>
+    <div class="empty-listings">
+      <i class="fa-regular fa-heart"></i>
+      <h3>No favorites yet</h3>
+      <p>Save places you love and they'll appear here.</p>
+      <a href="/listings" class="btn empty-listings-btn">Explore stays</a>
+    </div>
+  <% } %>
+</section>

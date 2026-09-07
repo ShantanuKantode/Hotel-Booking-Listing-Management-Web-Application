@@ -1,4 +1,7 @@
 <% layout("layouts/boilerplate") %>
+<script>
+   window.mapToken = "<%= process.env.MAP_TOKEN %>"
+</script>
 
 <div class="row">
    <div class="col-8 offset-2">
@@ -19,6 +22,37 @@
 </div>
 
 <br/>
+<% const isFavorite = favoriteIds.has(listing._id.toString()); %>
+<button
+   class="favorite-detail-btn <%= isFavorite ? "is-favorite" : "" %> offset-2"
+   type="button"
+   data-favorite-button
+   data-listing-id="<%= listing._id %>"
+   data-favorited="<%= isFavorite %>"
+   aria-label="<%= isFavorite ? "Remove this listing from favorites" : "Save this listing to favorites" %>"
+   aria-pressed="<%= isFavorite %>"
+>
+   <i class="fa-<%= isFavorite ? "solid" : "regular" %> fa-heart"></i>
+   <span><%= isFavorite ? "Saved to favorites" : "Save to favorites" %></span>
+</button>
+<br/>
+<section class="rating-summary col-8 offset-2" aria-label="Listing rating summary">
+   <% if (ratingSummary.reviewCount) { %>
+      <div class="rating-summary-header">
+         <div class="rating-stars" aria-label="Rated <%= ratingSummary.averageRating.toFixed(1) %> out of 5">
+            <% for (let star = 1; star <= 5; star++) { %>
+               <i class="fa-<%= star <= Math.round(ratingSummary.averageRating) ? "solid" : "regular" %> fa-star" aria-hidden="true"></i>
+            <% } %>
+            <span class="rating-count"><%= ratingSummary.reviewCount %> <%= ratingSummary.reviewCount === 1 ? "review" : "reviews" %></span>
+         </div>
+      </div>
+   <% } else { %>
+      <div class="rating-empty-state">
+         <i class="fa-solid fa-star" aria-hidden="true"></i>
+         <div><strong>New</strong><span>No reviews yet. Be the first to share your experience.</span></div>
+      </div>
+   <% } %>
+</section>
 <% if(currUser && listing.owner && currUser._id.equals(listing.owner._id)) { %>
 <div class="btns">
    <a href="/listings/<%= listing._id %>/edit" class="btn btn-light offset-2  col-1 edit-btn"> Edit </a>
@@ -27,11 +61,11 @@
    </form>
 </div>
 <% } %>
+<br>
 
-<hr>
-<div class="col-8 offset-2 mb-3">
+<div class="col-8 offset-2 mb-3 mt-2">
+   <% if (currUser && canReview) { %>
    <h3>Leave Review</h3>
-   <%  if(currUser) { %>
    <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
       <!-- <div class="mb-3 mt-3">
          <label for="rating" class="form-label" >Rating</label>
@@ -63,11 +97,15 @@
       </div>
       <button class="btn btn-dark">Submit</button>
    </form>
+   <% } else if (currUser) { %>
+   <p class="review-status-message">You have already reviewed this listing.</p>
+   <% } else { %>
+   <p class="review-status-message">Please <a href="/login">log in</a> to leave a review.</p>
 <% } %>
-   <hr>
    
-   <h4>All Review</h4>
+    <% if(listing.reviews.length > 0) {%>
    <div class="row">
+   <h4>All Review</h4>
    <% for(review of listing.reviews) { %>
       
       <div class="card col-5 ms-3 mb-3 ">
@@ -76,14 +114,22 @@
              <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
             <p class="card-text"><%= review.comment %></p>   
          </div>
-         <form class="mb-3" method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=Delete">
-            <button class="btn btn-dark mt-2" >Delete</button>
-         </form>
+         <% if (currUser && review.author && review.author._id.equals(currUser._id)) { %>
+            <form class="mb-3" method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=Delete">
+               <button class="btn btn-dark mt-2" >Delete</button>
+            </form>
+         <% } %>
       </div>
    <%} %>
+</div>
+<% } %>
+</div>
+<div class="col-8 offset-2 mb-3">
+   <h3>Location</h3>
+   <div id="map"> </div>
+</div>
 
 </div>
 
 
-</div>
-</div>
+<script src="/js/map.js"></script>

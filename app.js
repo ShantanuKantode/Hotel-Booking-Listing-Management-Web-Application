@@ -71,6 +71,7 @@ app.use((req,res,next) => {
 const listingRouter= require("./Routes/listing.js");
 const reviewRouter = require("./Routes/review.js");
 const userRouter = require("./Routes/user.js");
+const favoritesRouter = require("./Routes/favorites.js");
 
 //step-3 - mongodb connection
 async function main(){
@@ -93,17 +94,17 @@ app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//step-2 --> root route
+//step-2 --> root route (home )
 // app.get("/",(req,res)=>{
 //    res.send("Hii I am Root ");
 //    res.render("home.ejs");
 // });
 
- app.get("/",async (req, res) => {
+//  app.get("/",async (req, res) => {
    
-   const listings = await Listing.find({}).limit(6); // only 6 for homepage
-   res.render("home.ejs", { listings });
-});
+//    const listings = await Listing.find({}).limit(6); // only 6 for homepage
+//    res.render("home.ejs", { listings });
+// });
 
 
 
@@ -112,6 +113,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
+app.use("/favorites", favoritesRouter);
 app.use("/",userRouter);
 
 
