@@ -2,7 +2,7 @@
 <body>
    <h2>Edit this page :</h2>
    <br>
-   <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation">         
+   <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">         
       <div class="row">
       <div class="col">
 
@@ -22,11 +22,32 @@
 
       </div>
       
-      <br>
+      <div class="mb-4 image-preview-section">
+    <label class="form-label preview-label">Current Image</label>
+
+    <div class="preview-card">
+        <div class="preview-image-wrapper">
+            <img 
+                src="<%= orignalImageUrl %>" 
+                alt="Current listing image"
+                class="preview-image"
+            >
+        </div>
+
+        <div class="preview-info">
+            <div>
+                <span class="preview-title">Listing Image</span>
+                <span class="preview-subtitle">
+                    This is the image currently displayed on your listing.
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 
       <div class="md-3">
-      <label class="form-label">Image URL</label><br>
-      <input name="listing[image]" class="form-control" value="<%= listing.image.url %>"image URL" type="text" required>
+      <label class="form-label">Upload Image</label><br>
+      <input name="listing[image]" class="form-control" value="<%= listing.image.url %>"image URL" type="file" required>
       <div class="invalid-feedback">URL of image</div>   
       </div>
 

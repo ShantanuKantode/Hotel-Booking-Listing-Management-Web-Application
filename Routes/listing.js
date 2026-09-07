@@ -16,7 +16,7 @@ router.route("/")
 .post(                                    //Create Route
    isLoggedIn,
    upload.single('listing[image]'),
-    //validateListing,
+   validateListing,
    wrapAsync(listingController.createListing));
 
 
@@ -29,6 +29,7 @@ router.route("/:id")
 .put(                                         //Update route
    isLoggedIn,
    isOwner,
+   upload.single('listing[image]'),
    validateListing,
    wrapAsync(listingController.updateListing))
 .delete(                                   //Delete Route
