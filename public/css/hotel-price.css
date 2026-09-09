@@ -1,0 +1,39 @@
+
+   /* GST PRICE DISPLAY */
+
+
+.hotel-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.hotel-price-main {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.hotel-price strong {
+  color: #222;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.hotel-price-main > span {
+  color: #666;
+  font-size: 13px;
+}
+
+.gst-info {
+  display: block;
+  color: #717171;
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.gst-info[hidden] {
+  display: none;
+}

@@ -4,7 +4,7 @@
   <div class="hotel-card">
     <div class="hotel-image-wrapper">
       <a href="/listings/<%= listing._id %>" class="listing-link">
-        <img src="<%= listing.image.url %>" class="hotel-image" alt="<%= listing.title %>">
+        <img src="<%= listing.image.url %>" class="hotel-image" alt="<%= listing.title %> ">
         <% if (isGuestFavorite) { %>
           <div class="hotel-badge"><i class="fa-solid fa-star" aria-hidden="true"></i> Guest favorite</div>
         <% } %>
@@ -39,7 +39,30 @@
         </div>
         <div class="hotel-location"><i class="fa-solid fa-location-dot"></i><span><%= listing.location %></span></div>
         <div class="hotel-bottom">
-          <div class="hotel-price"><strong>&#8377;<%= listing.price.toLocaleString("en-IN") %></strong><span>/ night</span></div>
+          <!-- <div class="hotel-price"><strong>&#8377;<%= listing.price.toLocaleString("en-IN") %></strong><span>/ night</span></div> -->
+           <div
+  class="hotel-price"
+  data-price-container
+  data-base-price="<%= listing.price %>"
+>
+
+  <div class="hotel-price-main">
+
+    <strong data-price>
+      &#8377;<%= listing.price.toLocaleString("en-IN") %>
+    </strong>
+
+    <span>/ night</span>
+
+  </div>
+
+  <small
+    class="gst-info"
+    data-gst-info
+    aria-live="polite"
+  ></small>
+
+</div>
           <div class="listing-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </div>
       </div>

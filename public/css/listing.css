@@ -55,17 +55,23 @@
 .hotel-image-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
-  background: #eee;
+  border-radius: 16px 16px 0 0;
+}
+
+.hotel-image-wrapper .listing-link {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .hotel-image {
-  width: 100%;
-  height: 100%;
   display: block;
+  width: 100%;
+  aspect-ratio: auto;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  object-position: center;
 }
 
 .hotel-card:hover .hotel-image {
@@ -84,6 +90,33 @@
     transparent,
     rgba(0, 0, 0, 0.25)
   );
+}
+
+.hotel-image-wrapper .carousel,
+.hotel-image-wrapper .carousel-inner,
+.hotel-image-wrapper .carousel-item {
+  width: 100%;
+  height: 100%;
+}
+
+.hotel-image-wrapper .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .hotel-image-wrapper {
+    aspect-ratio: 3 / 2;
+  }
+
+  .hotel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .hotel-badge {

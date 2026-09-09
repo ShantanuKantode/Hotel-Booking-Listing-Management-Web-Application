@@ -14,7 +14,33 @@
    <p class="card-text"> 
       <h5> <b>Owner:</b>  <%= listing.owner?.username || "Unknown" %> </h5>
       <%= listing.description %> <br>
-      &#8377; <%= listing.price.toLocaleString("en-IN") %> <br>
+      <!-- &#8377; <%= listing.price.toLocaleString("en-IN") %>  -->
+       <div
+  class="hotel-price"
+  data-price-container
+  data-base-price="<%= listing.price %>"
+>
+
+  <div class="hotel-price-main">
+
+    <strong data-price>
+      &#8377;<%= listing.price.toLocaleString("en-IN") %>
+    </strong>
+
+    <span>/ night</span>
+
+  </div>
+
+  <small
+    class="gst-info"
+    data-gst-info
+    aria-live="polite"
+    hidden
+  ></small>
+
+</div>
+
+      <br>
       <%= listing.location %> <br>
       <%= listing.country %> <br>
    </p> 
