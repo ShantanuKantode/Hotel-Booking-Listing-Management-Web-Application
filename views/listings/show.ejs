@@ -1,8 +1,6 @@
 <% layout("layouts/boilerplate") %>
 
-<script>
-  window.mapToken = "<%= process.env.MAP_TOKEN %>";
-</script>
+
 
 <main class="listing-detail-page">
 
@@ -756,8 +754,15 @@
 
       <div class="listing-map-wrapper">
 
-        <div id="map"></div>
-
+        <div
+    id="map"
+    data-lat="<%= listing.geometry?.coordinates?.[1] ?? '' %>"
+    data-lng="<%= listing.geometry?.coordinates?.[0] ?? '' %>"
+    data-title="<%= listing.title %>"
+    data-location="<%= listing.location %>"
+    data-country="<%= listing.country %>"
+></div>
+        
       </div>
 
     </section>

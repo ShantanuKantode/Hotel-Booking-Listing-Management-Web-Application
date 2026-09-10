@@ -1,33 +1,221 @@
+<nav class="hz-navbar">
+  <div class="hz-navbar-inner">
 
-<nav class="navbar navbar-expand-md bg-body-light border-bottom">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/listings" aria-label="Horizone home">
-      <div class="brand-icon">
-        <img src="/images/logo.png" alt="Horizone logo" />
+    <!-- ================= LOGO ================= -->
+    <a href="/listings" class="hz-brand" aria-label="Horizone Home">
+
+      <div class="hz-brand-icon">
+        <img src="/images/logo.png" alt="Horizone Logo">
       </div>
-      <span><b>Horizone</b></span>
+
+      <span class="hz-brand-name">Horizone</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+
+
+    <!-- ================= MOBILE TOGGLE ================= -->
+    <button
+      class="hz-mobile-toggle"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#hzNavbarContent"
+      aria-controls="hzNavbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <!-- <a class="nav-link " aria-current="page" href="/">Home</a> -->
-        <a class="nav-link" href="/listings">Explore</a>
-        
+
+
+    <!-- ================= NAV CONTENT ================= -->
+    <div class="collapse hz-navbar-content" id="hzNavbarContent">
+
+
+      <!-- ================= LEFT NAV ================= -->
+      <div class="hz-left-nav">
+
+        <a href="/listings" class="hz-nav-link">
+          <i class="fa-solid fa-compass"></i>
+          <span>Explore</span>
+        </a>
+
       </div>
-       <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">Add your place</a>
-        <% if(!currUser) {%>
-        <a class="nav-link " aria-current="page" href="/signup"><b>Sign Up</b></a>
-        <a class="nav-link" href="/login"><b>Log in</b></a>
+
+
+      <!-- ================= SEARCH ================= -->
+      <form action="/listings" method="GET" class="hz-search" role="search">
+
+        <i class="fa-solid fa-magnifying-glass hz-search-icon"></i>
+
+        <input
+          type="text"
+          name="location"
+          placeholder="Search destinations, cities..."
+          value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+          autocomplete="off"
+        >
+
+        <button type="submit" class="hz-search-button"  aria-label="Search">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+      </form>
+
+
+      <!-- ================= RIGHT NAV ================= -->
+      <div class="hz-right-nav">
+
+        <!-- Add Your Place -->
+        <a href="/listings/new" class="hz-nav-link hz-add-place">
+          <i class="fa-solid fa-plus"></i>
+          <span>Add your place</span>
+        </a>
+
+
+        <% if (!currUser) { %>
+
+          <!-- SIGN UP -->
+          <a href="/signup" class="hz-signup">
+            Sign Up
+          </a>
+
+          <!-- LOGIN -->
+          <a href="/login" class="hz-login">
+            Log in
+          </a>
+
+
         <% } else { %>
-        <a class="nav-link" href="/favorites"><i class="fa-regular fa-heart"></i> Favorites (<span data-favorites-count><%= currUser.favorites ? currUser.favorites.length : 0 %></span>)</a>
-        <a class="nav-link" href="/logout"><b>Log out</b></a> 
+
+
+          <!-- FAVORITES -->
+          <a href="/favorites" class="hz-favorites" title="Favorites">
+
+            <i class="fa-regular fa-heart"></i>
+
+            <span class="hz-favorite-text">
+              Favorites
+            </span>
+
+            <span
+              class="hz-favorite-count"
+              data-favorites-count
+            >
+              <%= currUser.favorites ? currUser.favorites.length : 0 %>
+            </span>
+
+          </a>
+
+
+          <!-- PROFILE -->
+          <div class="hz-profile-wrapper">
+
+            <button
+              class="hz-profile-button"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+
+              <% if (currUser.avatar) { %>
+
+                <img
+                  src="<%= currUser.avatar %>"
+                  alt="Profile"
+                  class="hz-profile-image"
+                >
+
+              <% } else { %>
+
+                <span class="hz-profile-initial">
+                  <%= currUser.username
+                    ? currUser.username.charAt(0).toUpperCase()
+                    : "U"
+                  %>
+                </span>
+
+              <% } %>
+
+              <i class="fa-solid fa-chevron-down hz-profile-arrow"></i>
+
+            </button>
+
+
+            <!-- PROFILE DROPDOWN -->
+            <ul class="dropdown-menu hz-profile-menu dropdown-menu-end">
+
+              <li class="hz-profile-header">
+
+                <% if (currUser.avatar) { %>
+
+                  <img
+                    src="<%= currUser.avatar %>"
+                    alt="Profile"
+                    class="hz-dropdown-avatar"
+                  >
+
+                <% } else { %>
+
+                  <span class="hz-dropdown-avatar hz-profile-initial">
+                    <%= currUser.username
+                      ? currUser.username.charAt(0).toUpperCase()
+                      : "U"
+                    %>
+                  </span>
+
+                <% } %>
+
+                <div>
+                  <strong>
+                    <%= currUser.username || "User" %>
+                  </strong>
+
+                  <small>
+                    Welcome back
+                  </small>
+                </div>
+
+              </li>
+
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
+              <li>
+                <a class="dropdown-item hz-dropdown-item" href="/favorites">
+                  <i class="fa-regular fa-heart"></i>
+                  Favorites
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item hz-dropdown-item" href="/listings">
+                  <i class="fa-solid fa-compass"></i>
+                  Explore
+                </a>
+              </li>
+
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
+              <li>
+                <a class="dropdown-item hz-dropdown-item hz-logout" href="/logout">
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                  Log out
+                </a>
+              </li>
+
+            </ul>
+
+          </div>
+
         <% } %>
+
       </div>
+
     </div>
+
   </div>
 </nav>
-
-

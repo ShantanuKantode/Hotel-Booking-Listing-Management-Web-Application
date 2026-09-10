@@ -2,6 +2,7 @@ const Listing = require("../models/listing.js");
 const User = require("../models/user.js");
 const { listingSchema } = require("../schema");
 
+
 const categories = [
    "Mountain",
    "Beach",
@@ -97,16 +98,79 @@ module.exports.showListing = async(req,res,next)=>{
   res.render("listings/show.ejs", { listing, favoriteIds, ratingSummary, canReview });
 };
 
+
+
+//New Create listing logic with map
 module.exports.createListing = async(req,res,next)=>{
-   
+
    const url = req.file.path;
    const filename = req.file.filename;
-   
+
    const newListing = new Listing(req.body.listing);
-   newListing.owner = req.user._id;  //owner with listing
-   newListing.image = {url , filename};
+
+   newListing.owner = req.user._id;  // owner with listing
+   newListing.image = {url, filename};
+
+
+  
+   try {
+
+      const location = req.body.listing.location;
+      const country = req.body.listing.country;
+
+      const query = `${location}, ${country}`;
+
+     const response = await fetch(
+   `https://nominatim.openstreetmap.org/search?` +
+   `format=json` +
+   `&q=${encodeURIComponent(query)}` +
+   `&limit=1`,
+   {
+      headers: {
+         "User-Agent": "WanderLust/1.0"
+      }
+   }
+);
+
+      const data = await response.json();
+      console.log("Nominatim response:", data);
+
+      if (data.length > 0) {
+
+         const latitude = Number(data[0].lat);
+         const longitude = Number(data[0].lon);
+
+         newListing.geometry = {
+            type: "Point",
+            coordinates: [
+               longitude,
+               latitude
+            ]
+         };
+          
+         console.log("Location:", location);
+         console.log("Latitude:", latitude);
+         console.log("Longitude:", longitude);
+         console.log("Geometry:", newListing.geometry);
+
+      } else {
+
+         console.log("Location not found:", query);
+
+      }
+
+   } catch (error) {
+
+      console.log("Geocoding error:", error);
+
+   }
+
+
+  
    await newListing.save();
+
    req.flash("success" , "New Listing Created !");
+
    res.redirect("/listings");
 }
 

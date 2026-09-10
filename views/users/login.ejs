@@ -1,81 +1,181 @@
 <% layout("layouts/boilerplate") %>
 
-<div class="row mt-3">
+<div class="hz-auth-page">
 
-    <h2 class="mb-3 offset-3">
-        Welcome Back
-    </h2>
+    <div class="hz-auth-card">
 
-    <div class="col-6 offset-3">
+        <!-- Logo -->
+        <div class="hz-auth-brand">
+            <a href="/listings">
+                <div class="hz-auth-logo">
+                    <img src="/images/logo.png" alt="Horizone Logo">
+                </div>
 
-        <form action="/login" method="POST" novalidate class="needs-validation">
+                <span>Horizone</span>
+            </a>
+        </div>
+
+
+        <!-- Heading -->
+        <div class="hz-auth-header">
+
+            <h1>Welcome back</h1>
+
+            <p>
+                Log in to continue exploring amazing places.
+            </p>
+
+        </div>
+
+
+        <!-- Login Form -->
+        <form
+            action="/login"
+            method="POST"
+            novalidate
+            class="needs-validation hz-auth-form"
+        >
 
             <!-- Username -->
-            <div class="mb-3">
+            <div class="hz-input-group">
 
-                <label for="username" class="form-label">
+                <label for="username">
                     Username
                 </label>
 
-                <input
-                    name="username"
-                    type="text"
-                    id="username"
-                    class="form-control"
-                    required
-                >
+                <div class="hz-input-wrapper">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    <input
+                        name="username"
+                        type="text"
+                        id="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
 
                 <div class="valid-feedback">
-                    Looks Good!
+                    Looks good!
                 </div>
 
                 <div class="invalid-feedback">
-                    Enter Username
+                    Enter username
                 </div>
 
             </div>
 
 
             <!-- Password -->
-            <div class="mb-3">
+            <div class="hz-input-group">
 
-                <label for="password" class="form-label">
-                    Password
-                </label>
+                <div class="hz-label-row">
 
-                <input
-                    name="password"
-                    type="password"
-                    id="password"
-                    class="form-control"
-                    required
-                >
+                    <label for="password">
+                        Password
+                    </label>
+
+                </div>
+
+                <div class="hz-input-wrapper">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        name="password"
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="hz-password-toggle"
+                        id="passwordToggle"
+                        aria-label="Show password"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
 
                 <div class="valid-feedback">
-                    Looks Good!
+                    Looks good!
                 </div>
 
                 <div class="invalid-feedback">
-                    Enter Password
+                    Enter password
                 </div>
 
             </div>
 
 
             <!-- Login Button -->
-            <button class="btn btn-primary">
-                Login
+            <button
+                type="submit"
+                class="hz-login-button"
+            >
+                <span>Log in</span>
+                <i class="fa-solid fa-arrow-right"></i>
             </button>
 
         </form>
 
 
-        <!-- Signup Link -->
-        <p class="mt-3">
-            Don't have an account?
-            <a href="/signup">Sign Up</a>
+        <!-- Divider -->
+        <div class="hz-auth-divider">
+            <span>New to Horizone?</span>
+        </div>
+
+
+        <!-- Signup -->
+        <a href="/signup" class="hz-create-account">
+            Create an account
+        </a>
+
+
+        <!-- Bottom text -->
+        <p class="hz-auth-footer">
+            By continuing, you agree to our terms and privacy policy.
         </p>
 
     </div>
 
 </div>
+
+
+<script>
+    // Password show / hide
+    const passwordInput = document.getElementById("password");
+    const passwordToggle = document.getElementById("passwordToggle");
+
+    if (passwordToggle && passwordInput) {
+
+        passwordToggle.addEventListener("click", function () {
+
+            const isPassword =
+                passwordInput.type === "password";
+
+            passwordInput.type =
+                isPassword ? "text" : "password";
+
+            this.setAttribute(
+                "aria-label",
+                isPassword
+                    ? "Hide password"
+                    : "Show password"
+            );
+
+            this.innerHTML = isPassword
+                ? '<i class="fa-regular fa-eye-slash"></i>'
+                : '<i class="fa-regular fa-eye"></i>';
+
+        });
+
+    }
+</script>

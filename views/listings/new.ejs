@@ -1,83 +1,354 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="row">
-   <div class="col-8">   
-   <h3>Create New Listing</h3>
-   <br>
-   <form method="POST" action="/listings" novalidate class="needs-validation mb-3" enctype="multipart/form-data" >
-      <div class="mb-3">
-       <label for="title" class="form-label">Title</label>
-      <input name="listing[title]" placeholder="Title" type="text"  class="form-control" required/>
-      <div class="valid-feedback">Title Looks Good </div>
-      <div class="invalid-feedback">Enter title</div>
-      </div>
-    
+<div class="hz-new-listing-page">
 
-      <div class="md-3">
-      <label for="description" class="form-label">Description</label>
-      <textarea name="listing[description]" placeholder="description" type="textarea" class="form-control" required></textarea>
-      <div class="valid-feedback">Good description</div>
-      <div class="invalid-feedback">Enter Short description</div>
-      </div>
-      
+    <div class="hz-listing-form-card">
 
-      
-
-      <div class="md-3">
-      <label for="image" class="form-label">Upload Image </label>
-      <input name="listing[image]"  type="file" class="form-control" required/>
-      <div class="invalid-feedback">URL of image</div>
-      required
-   </div>
-      
-      
-      <div class="row">
-      <div class="md-3 col-md-4" >
-      <label for="price" class="form-label">Price </label>
-      <input name="listing[price]"  placeholder="price" type="number" class="form-control" required/>
-      <div class="valid-feedback"> </div>
-      <div class="invalid-feedback">Price Should be Valid</div>
-      </div>
-      
-       <div class="md-3 col-md-8">
-      <label for="country" class="form-label">Country</label>
-      <input type="text" name="listing[country]" placeholder="country" class="form-control" required/>
-      <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Country Should be Valid</div>
-       </div>
-      
-      </div>
-      
-      
-
-       <div class="md-3">
-      <label for="location" class="form-label">Location</label>
-      <input name="listing[location]" placeholder="location" type="text" class="form-control" required/>
-      <div class="valid-feedback"></div>
-      <div class="invalid-feedback">Enter Location</div>
-      </div>
-
-      <div class="mb-3">
-      <label for="category" class="form-label">Category</label>
-      <select id="category" name="listing[category]" class="form-select" required>
-         <option value="" selected disabled>Select a category</option>
-         <option value="Mountain">Mountain</option>
-         <option value="Beach">Beach</option>
-         <option value="Lakefront">Lakefront</option>
-         <option value="Farms">Farms</option>
-         <option value="Amazing Pools">Amazing Pools</option>
-         <option value="Cabins">Cabins</option>
-         <option value="Rooms">Rooms</option>
-         <option value="Hotels">Hotels</option>
-      </select>
-      <div class="invalid-feedback">Please select a category.</div>
-      </div>
        
-       <br/> <br/>
 
-       <button class="btn add-btn  md-3" >Add</button>
-   
-   </form>
-   </div>
-   </div>
+        <div class="hz-listing-form-header">
 
+            <div class="hz-listing-header-icon">
+                <i class="fa-solid fa-house"></i>
+            </div>
+
+            <div>
+                <span class="hz-listing-eyebrow">
+                    Share your place
+                </span>
+
+                <h1>Create New Listing</h1>
+
+                <p>
+                    Add your place to Horizone and help travelers
+                    discover something special.
+                </p>
+            </div>
+
+        </div>
+
+
+       
+        <form
+            method="POST"
+            action="/listings"
+            novalidate
+            class="needs-validation hz-listing-form"
+            enctype="multipart/form-data"
+        >
+
+
+            
+            <div class="hz-form-section">
+
+                <label for="title" class="hz-form-label">
+                    Title
+                    <span>*</span>
+                </label>
+
+                <div class="hz-form-input">
+
+                    <i class="fa-solid fa-heading"></i>
+
+                    <input
+                        name="listing[title]"
+                        id="title"
+                        placeholder="Give your place a memorable title"
+                        type="text"
+                        required
+                    >
+
+                </div>
+
+                <div class="valid-feedback">
+                    Title looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Enter title
+                </div>
+
+            </div>
+
+
+           
+            <div class="hz-form-section">
+
+                <label for="description" class="hz-form-label">
+                    Description
+                    <span>*</span>
+                </label>
+
+                <div class="hz-textarea-wrapper">
+
+                    <textarea
+                        name="listing[description]"
+                        id="description"
+                        placeholder="Tell travelers what makes your place special..."
+                        required
+                    ></textarea>
+
+                </div>
+
+                <div class="valid-feedback">
+                    Good description!
+                </div>
+
+                <div class="invalid-feedback">
+                    Enter a short description
+                </div>
+
+            </div>
+
+
+            
+
+            <div class="hz-form-section">
+
+                <label for="image" class="hz-form-label">
+                    Cover Image
+                    <span>*</span>
+                </label>
+
+                <label
+                    for="image"
+                    class="hz-image-upload"
+                >
+
+                    <div class="hz-upload-icon">
+
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    </div>
+
+                    <div class="hz-upload-content">
+
+                        <strong>
+                            Upload your property image
+                        </strong>
+
+                        <span>
+                            Choose a high-quality image of your place
+                        </span>
+
+                    </div>
+
+                    <div class="hz-upload-button">
+                        Browse
+                    </div>
+
+                    <input
+                        name="listing[image]"
+                        id="image"
+                        type="file"
+                        accept="image/*"
+                        required
+                    >
+
+                </label>
+
+                <div class="invalid-feedback">
+                    Please upload an image
+                </div>
+
+            </div>
+
+
+
+
+            <div class="hz-form-row">
+
+
+                <!-- Price -->
+
+                <div class="hz-form-section">
+
+                    <label for="price" class="hz-form-label">
+                        Price per night
+                        <span>*</span>
+                    </label>
+
+                    <div class="hz-form-input">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        <input
+                            name="listing[price]"
+                            id="price"
+                            placeholder="2500"
+                            type="number"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Price should be valid
+                    </div>
+
+                </div>
+
+
+                <!-- Country -->
+
+                <div class="hz-form-section">
+
+                    <label for="country" class="hz-form-label">
+                        Country
+                        <span>*</span>
+                    </label>
+
+                    <div class="hz-form-input">
+
+                        <i class="fa-solid fa-globe"></i>
+
+                        <input
+                            type="text"
+                            name="listing[country]"
+                            id="country"
+                            placeholder="India"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Country should be valid
+                    </div>
+
+                </div>
+
+            </div>
+
+
+          
+
+            <div class="hz-form-section">
+
+                <label for="location" class="hz-form-label">
+                    Location
+                    <span>*</span>
+                </label>
+
+                <div class="hz-form-input">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <input
+                        name="listing[location]"
+                        id="location"
+                        placeholder="City, state or specific location"
+                        type="text"
+                        required
+                    >
+
+                </div>
+
+                <div class="invalid-feedback">
+                    Enter location
+                </div>
+
+            </div>
+
+
+           
+
+            <div class="hz-form-section">
+
+                <label for="category" class="hz-form-label">
+                    Category
+                    <span>*</span>
+                </label>
+
+                <div class="hz-select-wrapper">
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                    <select
+                        id="category"
+                        name="listing[category]"
+                        required
+                    >
+
+                        <option
+                            value=""
+                            selected
+                            disabled
+                        >
+                            Select a category
+                        </option>
+
+                        <option value="Mountain">
+                            Mountain
+                        </option>
+
+                        <option value="Beach">
+                            Beach
+                        </option>
+
+                        <option value="Lakefront">
+                            Lakefront
+                        </option>
+
+                        <option value="Farms">
+                            Farms
+                        </option>
+
+                        <option value="Amazing Pools">
+                            Amazing Pools
+                        </option>
+
+                        <option value="Cabins">
+                            Cabins
+                        </option>
+
+                        <option value="Rooms">
+                            Rooms
+                        </option>
+
+                        <option value="Hotels">
+                            Hotels
+                        </option>
+
+                    </select>
+
+                    <i class="fa-solid fa-chevron-down hz-select-arrow"></i>
+
+                </div>
+
+                <div class="invalid-feedback">
+                    Please select a category.
+                </div>
+
+            </div>
+
+
+            
+            <div class="hz-form-submit">
+
+                <button
+                    type="submit"
+                    class="hz-publish-button"
+                >
+
+                    <span>
+                        Publish listing
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+                <p>
+                    You can edit your listing anytime after publishing.
+                </p>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>

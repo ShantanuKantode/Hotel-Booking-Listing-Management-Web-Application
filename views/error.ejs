@@ -1,72 +1,759 @@
-
-
 <% layout("/layouts/boilerplate") %>
 
 <style>
-  .error-container {
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
-  .error-card {
-    text-align: center;
-    padding: 2rem;
-    border-radius: 20px;
+
+
+.error-page {
+    min-height: calc(100vh - 80px);
+
     background: #ffffff;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    max-width: 500px;
+
+    color: #111111;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+
+
+.error-page::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    border-radius: 50%;
+
+    background: #f7f3ec;
+
+    top: -220px;
+    right: -100px;
+
+    z-index: 0;
+}
+
+
+.error-page::after {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background: #faf8f4;
+
+    bottom: -170px;
+    left: -100px;
+
+    z-index: 0;
+}
+
+
+
+
+.error-wrapper {
+
     width: 100%;
-  }
 
-  .error-icon {
-    font-size: 60px;
-    color: #ff385c; /* Airbnb color */
-  }
+    max-width: 1180px;
 
-  .error-title {
-    font-size: 28px;
-    font-weight: bold;
-    margin-top: 10px;
-  }
+    margin: 0 auto;
 
-  .error-msg {
-    color: #6c757d;
-    margin: 10px 0 20px;
-  }
+    padding: 70px 40px;
 
-  .btn-home {
-    background-color: #ff385c;
-    color: white;
-    border-radius: 25px;
-    padding: 10px 20px;
-    border: none;
-  }
+    position: relative;
 
-  .btn-home:hover {
-    background-color: #e03150;
-  }
+    z-index: 2;
+}
+
+
+
+
+.error-content {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    gap: 70px;
+
+}
+
+
+
+
+.error-text {
+
+    padding-left: 20px;
+
+}
+
+
+
+
+.error-label {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #666666;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 18px;
+}
+
+
+.error-label span {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #111111;
+
+}
+
+
+
+
+.error-code {
+
+    margin: 0;
+
+    font-size: clamp(110px, 14vw, 190px);
+
+    line-height: 0.8;
+
+    letter-spacing: -10px;
+
+    font-weight: 800;
+
+    color: #111111;
+}
+
+
+
+
+.error-heading {
+
+    margin: 35px 0 14px;
+
+    font-size: clamp(32px, 4vw, 48px);
+
+    line-height: 1.1;
+
+    letter-spacing: -1.5px;
+
+    font-weight: 600;
+
+    color: #171717;
+}
+
+
+
+
+.error-description {
+
+    max-width: 480px;
+
+    margin: 0 0 12px;
+
+    color: #666666;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+
+
+
+.error-message {
+
+    max-width: 470px;
+
+    margin: 20px 0 28px;
+
+    padding: 12px 15px;
+
+    background: #f8f8f8;
+
+    border-left: 3px solid #111111;
+
+    border-radius: 4px;
+
+    color: #555555;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    word-break: break-word;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.error-home-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 13px 21px;
+
+    border-radius: 10px;
+
+    background: #111111;
+
+    color: #ffffff !important;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    border: 1px solid #111111;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.error-home-btn i {
+
+    font-size: 12px;
+
+    transition: transform 0.25s ease;
+}
+
+
+.error-home-btn:hover {
+
+    background: #292929;
+
+    color: #ffffff !important;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.error-home-btn:hover i {
+
+    transform: translateX(4px);
+}
+
+
+
+
+.error-illustration {
+
+    min-height: 520px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+
+
+.illustration-bg {
+
+    position: absolute;
+
+    width: 450px;
+
+    height: 450px;
+
+    border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%;
+
+    background: #f7f3ec;
+
+    transform: rotate(-5deg);
+
+    z-index: 1;
+}
+
+
+
+
+.error-traveler {
+
+    width: 470px;
+
+    max-width: 100%;
+
+    max-height: 520px;
+
+    object-fit: contain;
+
+    position: relative;
+
+    z-index: 3;
+
+    mix-blend-mode: multiply;
+
+    animation: travelerFloat 5s ease-in-out infinite;
+}
+
+
+
+
+@keyframes travelerFloat {
+
+    0%,
+    100% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(-8px);
+
+    }
+}
+
+
+
+
+.travel-dot {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    z-index: 2;
+}
+
+
+.travel-dot-one {
+
+    width: 18px;
+    height: 18px;
+
+    background: #111111;
+
+    top: 70px;
+    right: 65px;
+}
+
+
+.travel-dot-two {
+
+    width: 10px;
+    height: 10px;
+
+    background: #c7b9a3;
+
+    bottom: 80px;
+    left: 60px;
+}
+
+
+.travel-line {
+
+    position: absolute;
+
+    width: 70px;
+    height: 1px;
+
+    background: #bdb5aa;
+
+    bottom: 75px;
+    right: 80px;
+
+    transform: rotate(-25deg);
+
+    z-index: 2;
+}
+
+
+
+.error-number-small {
+
+    position: absolute;
+
+    bottom: 25px;
+    left: 40px;
+
+    font-size: 12px;
+
+    color: #aaa;
+
+    letter-spacing: 2px;
+
+    z-index: 4;
+}
+
+
+
+
+@media (max-width: 900px) {
+
+    .error-wrapper {
+
+        padding: 55px 30px;
+    }
+
+
+    .error-content {
+
+        grid-template-columns: 1fr 0.9fr;
+
+        gap: 30px;
+    }
+
+
+    .error-code {
+
+        font-size: 125px;
+
+        letter-spacing: -7px;
+    }
+
+
+    .error-heading {
+
+        font-size: 36px;
+    }
+
+
+    .error-illustration {
+
+        min-height: 420px;
+    }
+
+
+    .illustration-bg {
+
+        width: 350px;
+        height: 350px;
+    }
+
+
+    .error-traveler {
+
+        width: 390px;
+    }
+
+}
+
+
+
+@media (max-width: 700px) {
+
+    .error-page {
+
+        min-height: calc(100vh - 70px);
+
+    }
+
+
+    .error-wrapper {
+
+        padding: 45px 20px;
+    }
+
+
+    .error-content {
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+
+    .error-text {
+
+        padding-left: 0;
+
+        order: 1;
+    }
+
+
+    .error-label {
+
+        justify-content: center;
+
+        margin-bottom: 15px;
+    }
+
+
+    .error-code {
+
+        font-size: 105px;
+
+        letter-spacing: -6px;
+    }
+
+
+    .error-heading {
+
+        margin-top: 28px;
+
+        font-size: 32px;
+    }
+
+
+    .error-description {
+
+        margin-left: auto;
+        margin-right: auto;
+
+        font-size: 14px;
+
+        max-width: 430px;
+    }
+
+
+    .error-message {
+
+        margin-left: auto;
+        margin-right: auto;
+
+        text-align: left;
+    }
+
+
+    .error-home-btn {
+
+        padding: 12px 19px;
+    }
+
+
+    .error-illustration {
+
+        order: 2;
+
+        min-height: 330px;
+
+        margin-top: 5px;
+    }
+
+
+    .illustration-bg {
+
+        width: 290px;
+        height: 290px;
+    }
+
+
+    .error-traveler {
+
+        width: 300px;
+
+        max-height: 330px;
+    }
+
+
+    .travel-dot-one {
+
+        top: 30px;
+        right: 35px;
+    }
+
+
+    .travel-dot-two {
+
+        bottom: 35px;
+        left: 35px;
+    }
+
+
+    .travel-line {
+
+        bottom: 40px;
+        right: 35px;
+    }
+
+
+    .error-number-small {
+
+        display: none;
+    }
+
+}
+
+
+
+@media (max-width: 400px) {
+
+    .error-wrapper {
+
+        padding: 35px 16px;
+    }
+
+
+    .error-code {
+
+        font-size: 85px;
+
+        letter-spacing: -4px;
+    }
+
+
+    .error-heading {
+
+        font-size: 28px;
+    }
+
+
+    .error-description {
+
+        font-size: 13px;
+    }
+
+
+    .error-illustration {
+
+        min-height: 280px;
+    }
+
+
+    .illustration-bg {
+
+        width: 250px;
+        height: 250px;
+    }
+
+
+    .error-traveler {
+
+        width: 260px;
+    }
+
+}
+
 </style>
 
-<div class="error-container">
-  <div class="error-card">
-    
-    <div class="error-icon">
-      ⚠️
+
+
+<div class="error-page">
+
+    <div class="error-wrapper">
+
+        <div class="error-content">
+
+
+          
+
+            <div class="error-text">
+
+                <div class="error-label">
+                    <span></span>
+                    Horizone
+                </div>
+
+
+                <div class="error-code">
+                    404
+                </div>
+
+
+                <h1 class="error-heading">
+                    Looks like you’re lost.
+                </h1>
+
+
+                <p class="error-description">
+                    The page you're looking for doesn't exist
+                    or may have moved. Don't worry, your next
+                    destination is just one click away.
+                </p>
+
+
+                <% if (message) { %>
+
+                    <div class="error-message">
+                        <%= message %>
+                    </div>
+
+                <% } %>
+
+
+                <a
+                    href="/listings"
+                    class="error-home-btn"
+                >
+
+                    Explore stays
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            
+
+            <div class="error-illustration">
+               <div class="illustration-bg"></div>
+                <span class="travel-dot travel-dot-one"></span>
+
+                <span class="travel-dot travel-dot-two"></span>
+                 <span class="travel-line"></span>
+                 <img
+                    src="/images/error-traveler.png"
+                    alt="Traveler illustration"
+                    class="error-traveler"
+                >
+
+
+                <span class="error-number-small">
+                    ERROR / 404
+                </span>
+
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="error-title">
-      Oops! Something went wrong
-    </div>
-
-    <p class="error-msg">
-      <%= message %>
-    </p>
-
-    <a href="/listings" class="btn btn-home">
-      Go Back to Listings
-    </a>
-
-  </div>
 </div>

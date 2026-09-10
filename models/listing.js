@@ -16,6 +16,16 @@ const listingSchema = new Schema({
    price:Number,
    location:String,
    country:String,
+   geometry: {
+      type: {
+         type: String,
+         enum: ["Point"],
+      },
+
+      coordinates: {
+         type: [Number],
+      },
+   },
    reviews:[
       {
           type:Schema.Types.ObjectId,
@@ -35,7 +45,7 @@ const listingSchema = new Schema({
             "Hotels"
         ]
     },
-   owner:{
+    owner:{
       type:Schema.Types.ObjectId,
       ref:"User",
    },

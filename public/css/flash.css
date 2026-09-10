@@ -1,170 +1,403 @@
-/* ================================
-   Flash Message
-================================ */
+/* =========================================================
+   MODERN FLASH / TOAST MESSAGE
+========================================================= */
 
 .flash-message {
-    width: min(90%, 600px);
-    margin: 20px auto;
+    width: min(92%, 620px);
+    margin: 22px auto;
 
-    padding: 15px 20px;
+    min-height: 68px;
+    padding: 12px 16px 12px 12px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
+    gap: 16px;
 
-    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 18px;
 
     box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.08),
-        0 3px 8px rgba(0, 0, 0, 0.05);
+        0 12px 35px rgba(0, 0, 0, 0.10),
+        0 4px 12px rgba(0, 0, 0, 0.06);
 
-    /* Fast display */
-    animation: flashIn 0.3s ease-out;
-}
-
-
-/* ================================
-   Success Message
-================================ */
-
-.flash-message.alert-success {
-    border: none;
-    border-left: 5px solid #10b981;
-
-    background: linear-gradient(
-        135deg,
-        #d1fae5,
-        #ecfdf5
-    );
-
-    color: #065f46;
-}
-
-
-/* ================================
-   Error Message
-================================ */
-
-.flash-message.alert-danger {
-    border: none;
-    border-left: 5px solid #ef4444;
-
-    background: linear-gradient(
-        135deg,
-        #fee2e2,
-        #fef2f2
-    );
-
-    color: #991b1b;
-}
-
-
-/* ================================
-   Flash Content
-================================ */
-
-.flash-content {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-
-/* ================================
-   Success Icon
-================================ */
-
-.alert-success .flash-content i {
-    font-size: 1.3rem;
-    color: #10b981;
-}
-
-
-/* ================================
-   Error Icon
-================================ */
-
-.alert-danger .flash-content i {
-    font-size: 1.3rem;
-    color: #ef4444;
-}
-
-
-/* ================================
-   Close Button
-================================ */
-
-.flash-message .btn-close {
-    padding: 8px;
-
-    opacity: 0.7;
+    animation: flashSlideIn 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 
     transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
+
+
+/* Subtle top highlight */
+
+.flash-message::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background: rgba(255, 255, 255, 0.9);
+}
+
+
+/* Hover */
+
+.flash-message:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.13),
+        0 6px 15px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.flash-message.alert-success {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0fdf4 0%,
+            #dcfce7 100%
+        );
+
+    color: #166534;
+
+    border-left: 4px solid #22c55e;
+}
+
+
+/* Success soft glow */
+
+.flash-message.alert-success::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    right: -55px;
+    top: -65px;
+
+    border-radius: 50%;
+
+    background: rgba(34, 197, 94, 0.10);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.flash-message.alert-danger {
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff5f5 0%,
+            #fee2e2 100%
+        );
+
+    color: #991b1b;
+
+    border-left: 4px solid #ef4444;
+}
+
+
+/* Error soft glow */
+
+.flash-message.alert-danger::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    right: -55px;
+    top: -65px;
+
+    border-radius: 50%;
+
+    background: rgba(239, 68, 68, 0.09);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   FLASH CONTENT
+========================================================= */
+
+.flash-content {
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 0;
+
+    font-size: 0.98rem;
+    font-weight: 600;
+
+    line-height: 1.5;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================================================
+   ICON CONTAINER
+========================================================= */
+
+.flash-content i {
+
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 1.15rem;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* Success icon */
+
+.alert-success .flash-content i {
+
+    color: #16a34a;
+
+    background: rgba(34, 197, 94, 0.14);
+
+    box-shadow:
+        0 4px 12px rgba(34, 197, 94, 0.12);
+}
+
+
+/* Error icon */
+
+.alert-danger .flash-content i {
+
+    color: #dc2626;
+
+    background: rgba(239, 68, 68, 0.13);
+
+    box-shadow:
+        0 4px 12px rgba(239, 68, 68, 0.12);
+}
+
+
+/* Icon hover */
+
+.flash-message:hover .flash-content i {
+
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.flash-content span {
+
+    display: block;
+
+    word-break: break-word;
+
+    padding-right: 5px;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.flash-message .btn-close {
+
+    width: 34px;
+    height: 34px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border-radius: 10px;
+
+    opacity: 0.55;
+
+    position: relative;
+    z-index: 3;
+
+    background-size: 11px;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        background-color 0.25s ease;
+}
+
 
 .flash-message .btn-close:hover {
+
     opacity: 1;
 
-    transform:
-        rotate(90deg)
-        scale(1.1);
+    transform: rotate(90deg);
+
+    background-color: rgba(0, 0, 0, 0.06);
 }
 
 
-/* ================================
-   Display Animation
-================================ */
+/* =========================================================
+   SUCCESS CLOSE
+========================================================= */
 
-@keyframes flashIn {
+.alert-success .btn-close:hover {
 
-    from {
-        opacity: 0;
-        transform: translateY(-15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+    background-color: rgba(34, 197, 94, 0.12);
 }
 
 
-/* ================================
-   Slow Upward Closing Animation
-================================ */
+/* =========================================================
+   ERROR CLOSE
+========================================================= */
 
-.flash-message:not(.show) {
-    animation: flashOut 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.alert-danger .btn-close:hover {
+
+    background-color: rgba(239, 68, 68, 0.10);
 }
 
 
-@keyframes flashOut {
+/* =========================================================
+   ENTRY ANIMATION
+========================================================= */
+
+@keyframes flashSlideIn {
 
     0% {
+        opacity: 0;
+        transform: translateY(-25px) scale(0.96);
+    }
+
+    60% {
         opacity: 1;
-        transform: translateY(0);
-    }
-
-    40% {
-        opacity: 0.9;
-        transform: translateY(-15px);
-    }
-
-    70% {
-        opacity: 0.6;
-        transform: translateY(-35px);
+        transform: translateY(4px) scale(1.01);
     }
 
     100% {
-        opacity: 0;
-        transform: translateY(-80px);
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+
+.flash-message.fade {
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+
+.flash-message.fade:not(.show) {
+
+    opacity: 0;
+
+    transform:
+        translateY(-25px)
+        scale(0.96);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .flash-message {
+
+        width: calc(100% - 24px);
+
+        min-height: 62px;
+
+        padding: 10px 12px 10px 10px;
+
+        border-radius: 15px;
+
+        gap: 10px;
     }
 
+
+    .flash-content {
+
+        gap: 10px;
+
+        font-size: 0.9rem;
+    }
+
+
+    .flash-content i {
+
+        width: 36px;
+        height: 36px;
+
+        min-width: 36px;
+
+        border-radius: 10px;
+
+        font-size: 1rem;
+    }
+
+
+    .flash-message .btn-close {
+
+        width: 30px;
+        height: 30px;
+
+        min-width: 30px;
+    }
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .flash-message,
+    .flash-message.fade,
+    .flash-content i,
+    .flash-message .btn-close {
+
+        animation: none;
+        transition: none;
+    }
 }
