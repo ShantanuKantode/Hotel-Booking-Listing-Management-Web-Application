@@ -80,14 +80,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 /* HOME PAGE */
 
-app.get(
-    "/",
-    wrapAsync(async (req, res) => {
-        const listings = await Listing.find({}).limit(6);
-        res.render("home.ejs", { listings });
-    })
-);
-
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 /* ROUTES */
 
