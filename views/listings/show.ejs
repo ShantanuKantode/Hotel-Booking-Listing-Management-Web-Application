@@ -6,13 +6,12 @@
 
   <div class="listing-detail-container">
 
-    <!-- Back Navigation -->
+    
     <a href="/listings" class="listing-back-link">
       <i class="fa-solid fa-arrow-left"></i>
       <span>Back to listings</span>
     </a>
 
-    <!-- Listing Header -->
     <header class="listing-detail-header">
 
       <div class="listing-header-content">
@@ -59,7 +58,6 @@
     </header>
 
 
-    <!-- Hero Image -->
     <section class="listing-hero-section">
 
       <div class="listing-hero">
@@ -73,18 +71,12 @@
     </section>
 
 
-    <!-- Main Content -->
+   
     <div class="listing-detail-grid">
-
-
-      <!-- ==========================================
-           MAIN CONTENT
-      =========================================== -->
 
       <div class="listing-main-content">
 
 
-        <!-- About Section -->
         <section class="listing-section listing-about-section">
 
           <div class="listing-section-heading">
@@ -107,7 +99,7 @@
           </div>
 
 
-          <!-- Host -->
+    
           <div class="listing-host-card">
 
             <div class="listing-host-avatar">
@@ -129,7 +121,7 @@
           </div>
 
 
-          <!-- Location Info -->
+        
           <div class="listing-location-info">
 
             <div class="listing-location-icon">
@@ -154,8 +146,6 @@
 
         </section>
 
-
-        <!-- Rating Summary -->
         <section
           class="listing-section listing-rating-section"
           aria-label="Listing rating summary"
@@ -239,8 +229,6 @@
 
         </section>
 
-
-        <!-- Reviews Section -->
         <section class="listing-section listing-reviews-section">
 
           <div class="listing-section-title-row">
@@ -269,7 +257,6 @@
           </div>
 
 
-          <!-- Review Form -->
           <% if (currUser && canReview) { %>
 
             <div class="review-form-card">
@@ -475,8 +462,6 @@
 
           <% } %>
 
-
-          <!-- Existing Reviews -->
           <% if (listing.reviews.length > 0) { %>
 
             <div class="reviews-list">
@@ -556,14 +541,9 @@
       </div>
 
 
-      <!-- ==========================================
-           SIDEBAR
-      =========================================== -->
-
       <aside class="listing-sidebar">
 
 
-        <!-- Price Card -->
         <div class="listing-price-card">
 
           <div class="listing-price-heading">
@@ -607,8 +587,6 @@
 
           <div class="listing-price-divider"></div>
 
-
-          <!-- Favorite -->
           <% const isFavorite = favoriteIds.has(listing._id.toString()); %>
 
           <button
@@ -632,7 +610,6 @@
         </div>
 
 
-        <!-- Owner Actions -->
         <% if (
           currUser &&
           listing.owner &&
@@ -678,7 +655,6 @@
         <% } %>
 
 
-        <!-- Quick Information -->
         <div class="listing-info-card">
 
           <div class="listing-info-item">
@@ -728,10 +704,6 @@
 
     </div>
 
-
-    <!-- ==========================================
-         LOCATION / MAP
-    =========================================== -->
 
     <section class="listing-map-section">
 

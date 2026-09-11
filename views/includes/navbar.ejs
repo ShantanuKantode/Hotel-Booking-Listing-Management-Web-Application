@@ -1,7 +1,7 @@
 <nav class="hz-navbar">
   <div class="hz-navbar-inner">
 
-    <!-- ================= LOGO ================= -->
+    
     <a href="/listings" class="hz-brand" aria-label="Horizone Home">
 
       <div class="hz-brand-icon">
@@ -12,7 +12,7 @@
     </a>
 
 
-    <!-- ================= MOBILE TOGGLE ================= -->
+    
     <button
       class="hz-mobile-toggle"
       type="button"
@@ -28,11 +28,11 @@
     </button>
 
 
-    <!-- ================= NAV CONTENT ================= -->
+  
     <div class="collapse hz-navbar-content" id="hzNavbarContent">
 
 
-      <!-- ================= LEFT NAV ================= -->
+   
       <div class="hz-left-nav">
 
         <a href="/listings" class="hz-nav-link">
@@ -43,14 +43,14 @@
       </div>
 
 
-      <!-- ================= SEARCH ================= -->
+    
       <form action="/listings" method="GET" class="hz-search" role="search">
 
         <i class="fa-solid fa-magnifying-glass hz-search-icon"></i>
 
         <input
           type="text"
-          name="location"
+          name="search"
           placeholder="Search destinations, cities..."
           value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
           autocomplete="off"
@@ -63,10 +63,10 @@
       </form>
 
 
-      <!-- ================= RIGHT NAV ================= -->
+      
       <div class="hz-right-nav">
 
-        <!-- Add Your Place -->
+     
         <a href="/listings/new" class="hz-nav-link hz-add-place">
           <i class="fa-solid fa-plus"></i>
           <span>Add your place</span>
@@ -75,12 +75,12 @@
 
         <% if (!currUser) { %>
 
-          <!-- SIGN UP -->
+         
           <a href="/signup" class="hz-signup">
             Sign Up
           </a>
 
-          <!-- LOGIN -->
+         
           <a href="/login" class="hz-login">
             Log in
           </a>
@@ -89,7 +89,7 @@
         <% } else { %>
 
 
-          <!-- FAVORITES -->
+          
           <a href="/favorites" class="hz-favorites" title="Favorites">
 
             <i class="fa-regular fa-heart"></i>
@@ -108,7 +108,7 @@
           </a>
 
 
-          <!-- PROFILE -->
+         
           <div class="hz-profile-wrapper">
 
             <button
@@ -142,7 +142,7 @@
             </button>
 
 
-            <!-- PROFILE DROPDOWN -->
+          
             <ul class="dropdown-menu hz-profile-menu dropdown-menu-end">
 
               <li class="hz-profile-header">

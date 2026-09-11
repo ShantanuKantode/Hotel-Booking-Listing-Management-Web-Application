@@ -36,41 +36,140 @@ const getRatingSummary = (reviews) => {
    };
 };
 
-module.exports.index=async(req,res)=>{
-   const { category, sort } = req.query;
-   const selectedCategory = categories.includes(category) ? category : null;
-   const match = selectedCategory ? { category: selectedCategory } : {};
+
+
+
+module.exports.index = async (req, res) => {
+   const { category, sort, search } = req.query;
+
+   const selectedCategory = categories.includes(category)
+      ? category
+      : null;
+
+   const searchQuery =
+      typeof search === "string"
+         ? search.trim()
+         : "";
+
+   const match = {};
+
+   if (selectedCategory) {
+      match.category = selectedCategory;
+   }
+
+   if (searchQuery) {
+      const escapedSearch = searchQuery.replace(
+         /[.*+?^${}()|[\]\\]/g,
+         "\\$&"
+      );
+
+      const searchRegex = new RegExp(
+         escapedSearch,
+         "i"
+      );
+
+      match.$or = [
+         { title: searchRegex },
+         { location: searchRegex },
+         { country: searchRegex }
+      ];
+   }
+
    const allListing = await Listing.aggregate([
-      { $match: match },
+      {
+         $match: match
+      },
+
       {
          $lookup: {
             from: "reviews",
             localField: "reviews",
             foreignField: "_id",
-            as: "reviewData",
-         },
+            as: "reviewData"
+         }
       },
+
       {
          $addFields: {
-            reviewCount: { $size: "$reviewData" },
+            reviewCount: {
+               $size: "$reviewData"
+            },
+
             averageRating: {
                $cond: [
-                  { $gt: [{ $size: "$reviewData" }, 0] },
-                  { $round: [{ $avg: "$reviewData.rating" }, 1] },
-                  null,
-               ],
-            },
-         },
-      },
-      ...(sort === "rating" ? [{ $sort: { averageRating: -1, _id: 1 } }] : []),
-      { $project: { reviewData: 0 } },
-   ]);
-   const favoriteIds = new Set(
-      (req.user?.favorites || []).map((favoriteId) => favoriteId.toString())
-   );
+                  {
+                     $gt: [
+                        { $size: "$reviewData" },
+                        0
+                     ]
+                  },
 
-   res.render("listings/index.ejs", { allListing, selectedCategory, favoriteIds });
+                  {
+                     $round: [
+                        { $avg: "$reviewData.rating" },
+                        1
+                     ]
+                  },
+
+                  null
+               ]
+            }
+         }
+      },
+
+      ...(sort === "rating"
+         ? [
+              {
+                 $sort: {
+                    averageRating: -1,
+                    _id: 1
+                 }
+              }
+           ]
+         : []),
+
+      {
+         $project: {
+            reviewData: 0
+         }
+      }
+   ]);
+
+   
+   
+   let favoriteIds = new Set();
+
+if (req.user) {
+   const currentUser = await User.findById(req.user._id)
+      .select("favorites");
+
+   favoriteIds = new Set(
+      (currentUser?.favorites || []).map(
+         (favoriteId) => favoriteId.toString()
+      )
+   );
+}
+console.log("Current user:", req.user?.username);
+console.log("Fresh favorites:", [...favoriteIds]);
+
+
+   if (searchQuery && allListing.length === 0) {
+      req.flash(
+         "error",
+         `No listings found for "${searchQuery}".`
+      );
+   }
+
+   res.render("listings/index.ejs", {
+      allListing,
+      selectedCategory,
+      favoriteIds,
+      searchQuery
+   });
 };
+
+
+
 
 module.exports.renderNewForm = (req,res,next)=>{
     res.render("listings/new.ejs");

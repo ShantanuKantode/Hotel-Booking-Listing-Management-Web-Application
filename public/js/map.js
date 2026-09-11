@@ -1,24 +1,4 @@
 
-    // let mapToken = window.mapToken;
-    // console.log(mapToken);
-    // mapboxgl.accessToken = mapToken;
-
-    // const map = new mapboxgl.Map({
-    //     container: "map", // container ID
-    //     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    //     style: "mapbox://styles/mapbox/streets-v12",
-    //     center: [72.8777, 19.0760], // starting position [lng, lat]
-    //     zoom: 9, // starting zoom
-    // });
-
-
-
-
-   // =========================================
-// WANDERLUST MAP
-// OpenStreetMap + Leaflet
-// =========================================
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const mapElement = document.getElementById("map");
@@ -26,10 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!mapElement) {
         return;
     }
-
-    // =========================================
-// GET LISTING COORDINATES
-// =========================================
 
 const latitudeValue =
     mapElement.dataset.lat;
@@ -53,9 +29,6 @@ const country =
     mapElement.dataset.country || "";
 
 
-// =========================================
-// VALIDATE COORDINATES
-// =========================================
 
 if (
     latitudeValue === "" ||
@@ -85,9 +58,7 @@ if (
 }
     
 
-    // =========================================
-    // CREATE MAP
-    // =========================================
+
 
     const map = L.map("map", {
 
@@ -103,10 +74,6 @@ if (
     });
 
 
-    // =========================================
-    // OPENSTREETMAP TILE LAYER
-    // =========================================
-
     L.tileLayer(
         "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
@@ -119,19 +86,13 @@ if (
     ).addTo(map);
 
 
-    // =========================================
-    // MARKER
-    // =========================================
-
     const marker = L.marker([
         latitude,
         longitude
     ]).addTo(map);
 
 
-    // =========================================
-    // POPUP
-    // =========================================
+
 
     marker.bindPopup(`
         <div class="map-popup">
@@ -172,16 +133,11 @@ if (
     `);
 
 
-    // =========================================
-    // OPEN POPUP
-    // =========================================
+
 
     marker.openPopup();
 
 
-    // =========================================
-    // FIX MAP SIZE
-    // =========================================
 
     setTimeout(() => {
 
@@ -190,9 +146,7 @@ if (
     }, 100);
 
 
-    // =========================================
-    // ESCAPE HTML
-    // =========================================
+
 
     function escapeHtml(value) {
 

@@ -4,7 +4,7 @@ module.exports.renderSignUp = (req, res) => {
     res.render("users/signup.ejs");
 }
 
-module.exports.signUp = async(req,res)=>{
+module.exports.signUp = async(req,res,next)=>{
   try{
    const{username,email,password} = req.body;
    const newUser = User({username,email});
@@ -29,10 +29,16 @@ module.exports.renderlogIn = (req,res)=>{
    res.render("users/login.ejs");
 }
 
-module.exports.logIn = async(req,res)=>{
-        req.flash("success", "Welcome back!");
+module.exports.logIn = async(req,res,next)=>{
+   try{
+       req.flash("success", "Welcome back!");
         let redirectUrl = res.locals.redirectUrl || "/listings";
         res.redirect(redirectUrl);
+   }
+   catch(err){
+      return next(err);
+   }
+       
 }
 
 module.exports.logOut = (req,res,next)=>{
@@ -42,6 +48,6 @@ module.exports.logOut = (req,res,next)=>{
     }
     req.flash("success","User get log out!");
     res.redirect("/listings");
-   })
+   });
 
 }

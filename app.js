@@ -22,7 +22,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-
+const dbUrl = process.env.ATLASDB_URL;
 
 //Express-Session
 const sessionOption = {
@@ -75,7 +75,7 @@ const favoritesRouter = require("./Routes/favorites.js");
 
 //step-3 - mongodb connection
 async function main(){
-   await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
+   await mongoose.connect(dbUrl);
 }
 
 main()
@@ -153,4 +153,3 @@ app.use((err,req,res,next)=>{
 app.listen(8080,()=>{
    console.log("Server is listening to port 8080")
 });
-
