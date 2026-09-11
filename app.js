@@ -150,6 +150,8 @@ app.use((err,req,res,next)=>{
  })
 
 //Step-1 -> start server
-app.listen(8080,()=>{
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT,()=>{
    console.log("Server is listening to port 8080")
 });
