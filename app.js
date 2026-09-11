@@ -26,7 +26,7 @@ const dbUrl = process.env.ATLASDB_URL;
 
 //Express-Session
 const sessionOption = {
-   secret:"mysecret",
+   secret:process.env.SECRET,
    resave:false,
    saveUninitialized: true,
    //cookie-option
